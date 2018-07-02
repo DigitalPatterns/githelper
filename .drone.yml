@@ -42,6 +42,9 @@ pipeline:
 
   run_backup:
     image: quay.io/ukhomeofficedigital/githelper:latest
+    secrets:
+     - repo_url
+     - private_key
     when:
       event: deployment
       environment: development
