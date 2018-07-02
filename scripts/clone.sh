@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-echo ${PRIVATE_KEY} | base64 -d > /home/user1/.ssh/id_rsa
-chmod 400 /home/user1/.ssh/id_rsa
+echo ${PRIVATE_KEY} | base64 -d > /home/${USER}/.ssh/id_rsa
+chmod 400 /home/${USER}/.ssh/id_rsa
 
-touch /home/user1/.ssh/known_hosts
+touch /home/${USER}/.ssh/known_hosts
 
 /bin/gethost.py ${REPO_URL}
 
