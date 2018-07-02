@@ -4,13 +4,11 @@ ENV KUBE_LATEST_VERSION="v1.10.0"
 
 RUN apk --no-cache -U upgrade \
     && \
-    apk add --no-cache -U bash mariadb-client mongodb mongodb-tools git python py-pip openssh-client postgresql-client ca-certificates gettext deps curl \
+    apk add --no-cache -U bash mariadb-client mongodb mongodb-tools git python py-pip openssh-client postgresql-client ca-certificates gettext curl \
     && \
     curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
     && \
     chmod +x /usr/local/bin/kubectl \
-    && \
-    apk del --purge deps \
     && \
     rm /var/cache/apk/*
 
