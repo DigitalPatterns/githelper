@@ -29,7 +29,8 @@ $k cp ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/forms.tar.gz forms.tar.gz --contai
 tar zxvf forms.tar.gz
 git config user.email "backup@docker.service"
 git config user.name "Backup Mongo"
-git commit -a -m "Auto Mongo FormIO Backup"
+git add forms/*.json
+git commit -m "Auto Mongo FormIO Backup"
 git push origin backup
 
 $k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} -- /bin/bash -c "rm /tmp/forms.tar.gz"
