@@ -49,4 +49,4 @@ pipeline:
       event: deployment
       environment: development
     commands:
-     - /bin/backupMongo.sh
+     - scripts/backupMongo.sh
