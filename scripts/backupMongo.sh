@@ -11,6 +11,6 @@ kubectl --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MO
 cd /repo
 kubectl cp ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/forms.tar.gz forms.tar.gz --container ${MONGO_CONTAINER_NAME}
 tar zxvf forms.tar.gz
-git -am forms/* -c "Auto Mongo FormIO Backup"
+git commit -a forms/* -c "Auto Mongo FormIO Backup"
 git push origin backup
 kubectl --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} "rm /tmp/forms.tar.gz"
