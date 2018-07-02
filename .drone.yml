@@ -23,7 +23,8 @@ pipeline:
       - docker push quay.io/ukhomeofficedigital/githelper:$${DRONE_COMMIT_SHA}
       - docker push quay.io/ukhomeofficedigital/githelper:latest
     when:
-      event: [tag,push]
+      event: [push]
+      local: false
 
   tag_to_quay:
     image: docker:17.09.1
@@ -37,3 +38,10 @@ pipeline:
       - docker push quay.io/ukhomeofficedigital/githelper:$${DRONE_TAG}
     when:
       event: [tag]
+      local: false
+
+  run_backup:
+    image: quay.io/ukhomeofficedigital/githelper:latest
+    when:
+      event: deployment
+      environment: development
