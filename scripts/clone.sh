@@ -7,7 +7,6 @@ touch /home/user1/.ssh/known_hosts
 
 /bin/gethost.py ${REPO_URL}
 
-mkdir -p /repo
 git clone ${REPO_URL} /repo
 cd /repo
 git fetch --all --tags --prune

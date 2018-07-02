@@ -6,9 +6,9 @@ RUN apk --no-cache -U upgrade \
     && \
     apk add --no-cache -U bash mariadb-client mongodb mongodb-tools git python py-pip openssh-client postgresql-client ca-certificates gettext curl \
     && \
-    curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
+    curl -L https://storage.googleapis.com/kubernetes-release/release/${KUBE_LATEST_VERSION}/bin/linux/amd64/kubectl -o /bin/kubectl \
     && \
-    chmod +x /usr/local/bin/kubectl \
+    chmod +x /bin/kubectl \
     && \
     rm /var/cache/apk/*
 
@@ -30,7 +30,7 @@ RUN addgroup -S user1 \
     && \
     chmod +x /bin/*.py /bin/*.sh
 
-WORKDIR /repo
+WORKDIR /
 
 USER user1
 
