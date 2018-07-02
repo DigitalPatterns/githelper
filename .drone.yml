@@ -45,3 +45,5 @@ pipeline:
     when:
       event: deployment
       environment: development
+    commands:
+     - scripts/backupMongo.sh
