@@ -46,6 +46,7 @@ pipeline:
      - repo_url
      - private_key
      - kubectl_token
+     - kubectl_server
     when:
       event: deployment
       environment: development
