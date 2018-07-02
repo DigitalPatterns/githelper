@@ -32,6 +32,6 @@ RUN addgroup -S user1 \
 
 WORKDIR /
 
-USER user1
+USER 1000
 
 ENTRYPOINT /bin/bash
