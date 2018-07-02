@@ -10,8 +10,6 @@ export KUBECTL_SERVER="${KUBECTL_SERVER}"
 export k="kubectl --server ${KUBECTL_SERVER} --token ${KUBECTL_TOKEN} --insecure-skip-tls-verify=true"
 export FORMIO_POD=$($k --namespace ${KUBECTL_NAMESPACE} get pods | grep ${FORMIO_DEPLOYMENT_NAME} | cut -f 1 -d " ")
 
-env
-
 clone.sh
 
 $k cp /bin/exportMongo.sh ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/exportMongo.sh --container ${MONGO_CONTAINER_NAME}
