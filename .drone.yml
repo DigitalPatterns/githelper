@@ -41,7 +41,7 @@ pipeline:
       local: false
 
   run_backup:
-    image: quay.io/ukhomeofficedigital/githelper:latest
+    image: quay.io/ukhomeofficedigital/githelper:4a7e1fdc8ad9b18152752a81d8a538d354c89fcc
     secrets:
      - repo_url
      - private_key
