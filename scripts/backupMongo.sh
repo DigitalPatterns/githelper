@@ -2,6 +2,7 @@
 set -x
 
 export USER=$(whoami)
+mkdir -p ${HOME}/.kube
 export KUBECTL_NAMESPACE="${KUBECTL_NAMESPACE:-bfarch-dev}"
 export FORMIO_DEPLOYMENT_NAME="${FORMIO_DEPLOYMENT_NAME:-formio}"
 export MONGO_CONTAINER_NAME="${MONGO_CONTAINER_NAME:-mongo}"
@@ -18,7 +19,7 @@ $k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_C
 cd /repo
 $k cp ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/forms.tar.gz forms.tar.gz --container ${MONGO_CONTAINER_NAME}
 tar zxvf forms.tar.gz
-git commit -a -m "Auto Mongo FormIO Backup"
+git commit -a --author="Backup <backup@docker.server>" -m "Auto Mongo FormIO Backup"
 git push origin backup
 
 $k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} -- /bin/bash -c "rm /tmp/forms.tar.gz"
