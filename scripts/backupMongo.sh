@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export USER=$(whoami)
 export KUBECTL_NAMESPACE="${KUBECTL_NAMESPACE:-bfarch-dev}"
 export FORMIO_DEPLOYMENT_NAME="${FORMIO_DEPLOYMENT_NAME:-formio}"
 export MONGO_CONTAINER_NAME="${MONGO_CONTAINER_NAME:-mongo}"
