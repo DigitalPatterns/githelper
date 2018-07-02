@@ -2,6 +2,14 @@
 set -x
 
 export USER=$(whoami)
+
+if [[ ! ${USER} -eq "root" ]]
+then
+  export HOME="/home/${USER}"
+else
+  export HOME="/tmp"
+fi
+
 mkdir -p ${HOME}/.kube
 export KUBECTL_NAMESPACE="${KUBECTL_NAMESPACE:-bfarch-dev}"
 export FORMIO_DEPLOYMENT_NAME="${FORMIO_DEPLOYMENT_NAME:-formio}"
