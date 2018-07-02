@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -x
 
 export USER=$(whoami)
 export KUBECTL_NAMESPACE="${KUBECTL_NAMESPACE:-bfarch-dev}"
@@ -14,7 +15,7 @@ env
 clone.sh
 
 $k cp /bin/exportMongo.sh ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/exportMongo.sh --container ${MONGO_CONTAINER_NAME}
-$k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} '/bin/bash -c "chmod +x /tmp/exportMongo.sh; /tmp/exportMongo.sh"'
+$k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} -- /bin/bash -c "chmod +x /tmp/exportMongo.sh; /tmp/exportMongo.sh"
 
 cd /repo
 $k cp ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/forms.tar.gz forms.tar.gz --container ${MONGO_CONTAINER_NAME}
@@ -22,4 +23,4 @@ tar zxvf forms.tar.gz
 git commit -a forms/* -c "Auto Mongo FormIO Backup"
 git push origin backup
 
-$k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} "rm /tmp/forms.tar.gz"
+$k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} -- /bin/bash -c "rm /tmp/forms.tar.gz"
