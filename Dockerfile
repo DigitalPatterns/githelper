@@ -10,7 +10,7 @@ RUN apk --no-cache -U upgrade \
     && \
     chmod +x /bin/kubectl \
     && \
-    rm /var/cache/apk/*
+    rm -rf /var/cache/apk/*
 
 ADD scripts/* /bin/
 
