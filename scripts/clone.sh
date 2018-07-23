@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 export USER=$(whoami)
 
 if [[ ! ${USER} -eq "root" ]]
@@ -22,10 +24,15 @@ git fetch --all --tags --prune
 
 if [[ ! -z  ${GIT_TAG} ]]
 then
-  git checkout tags/${GIT_TAG}
+  if [[ ! ${GIT_TAG} == "master" ]]
+  then
+    git checkout tags/${GIT_TAG}
+   fi
 else
   git checkout backup
 fi
+
+ls /repo
 
 if (($? > 0))
 then

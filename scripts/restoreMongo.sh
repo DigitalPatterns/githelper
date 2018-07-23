@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 /bin/clone.sh
 
 mongod --config /config/mongod.conf > /dev/null &
