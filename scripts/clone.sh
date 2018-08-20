@@ -31,12 +31,12 @@ git fetch --all --tags --prune
 
 if [[ ! -z  ${GIT_TAG} ]]
 then
-  if [[ ! ${GIT_TAG} == "master" ]]
+  if [[ `git show-ref --tags | egrep -q "refs/tags/${GIT_TAG}"` ]]
   then
     git checkout tags/${GIT_TAG}
-   fi
-else
-  git checkout backup
+  elif [[ `git show-ref --heads | egrep -q "refs/heads/${GIT_TAG}"` ]]
+    git checkout ${GIT_TAG}
+  fi
 fi
 
 ls /repo
