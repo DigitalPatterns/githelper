@@ -9,6 +9,11 @@ else
 fi
 
 /bin/clone.sh
+if [[ $? -ne 0 ]]
+then
+    echo "GIT Error - aborting"
+    exit 2
+fi
 
 mongod --config /config/mongod.conf > /dev/null &
 

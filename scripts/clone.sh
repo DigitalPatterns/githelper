@@ -20,7 +20,7 @@ touch /home/${USER}/.ssh/known_hosts
 /bin/gethost.py ${REPO_URL}
 
 git clone ${REPO_URL} /repo
-if [[ $1 -ne 0 ]]
+if [[ $? -ne 0 ]]
 then
     echo "GIT Clone Error"
     exit 1
