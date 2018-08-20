@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-set -x
+if [[ -z ${DEBUG} ]]
+then
+    set -x
+fi
 
 export USER=$(whoami)
 
@@ -11,29 +14,29 @@ else
   export HOME="/tmp"
 fi
 
-echo ${PRIVATE_KEY}
-
 echo ${PRIVATE_KEY} | base64 -d > /home/${USER}/.ssh/id_rsa
 chmod 400 /home/${USER}/.ssh/id_rsa
-
 touch /home/${USER}/.ssh/known_hosts
-
 /bin/gethost.py ${REPO_URL}
 
-echo ${REPO_URL}
-
 git clone ${REPO_URL} /repo
+if [[ $1 -ne 0 ]]
+then
+    echo "GIT Clone Error"
+    exit 1
+fi
+
 cd /repo
 ls -la
 cat .git/config
-
 git fetch --all --tags --prune
+git show-ref --heads
 
 if [[ ! -z  ${GIT_TAG} ]]
 then
     git show-ref --tags | egrep -q "refs/tags/${GIT_TAG}"
     TAG_EXIT=$?
-    git show-ref --heads | egrep -q "refs/heads/${GIT_TAG}"
+    git show-ref --heads | egrep -q "remotes/origin/${GIT_TAG}"
     BRANCH_EXIT=$?
     if [[ ${TAG_EXIT} -eq 0 ]]
     then
