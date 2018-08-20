@@ -43,9 +43,11 @@ then
         git checkout ${GIT_TAG}
     else
         echo "TAG or Branch not found: ${GIT_TAG}"
+        exit 1
     fi
 else
     echo "TAG or Branch not set"
+    exit 1
 fi
 
 ls /repo
