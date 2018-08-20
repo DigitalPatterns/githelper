@@ -38,9 +38,19 @@ then
     if [[ ${TAG_EXIT} -eq 0 ]]
     then
         git checkout tags/${GIT_TAG}
+        if [[ $1 -ne 0 ]]
+        then
+            echo "Error checking out tag ${GIT_TAG}"
+            exit 2
+        fi
     elif [[ ${BRANCH_EXIT} -eq 0 ]]
     then
         git checkout ${GIT_TAG}
+        if [[ $1 -ne 0 ]]
+        then
+            echo "Error checking out branch ${GIT_TAG}"
+            exit 2
+        fi
     else
         echo "TAG or Branch not found: ${GIT_TAG}"
         exit 1
