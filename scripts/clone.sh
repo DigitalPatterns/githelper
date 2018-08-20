@@ -35,6 +35,7 @@ then
   then
     git checkout tags/${GIT_TAG}
   elif [[ `git show-ref --heads | egrep -q "refs/heads/${GIT_TAG}"` ]]
+  then
     git checkout ${GIT_TAG}
   fi
 fi
