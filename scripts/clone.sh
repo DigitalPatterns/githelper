@@ -29,14 +29,13 @@ fi
 cd /repo
 ls -la
 cat .git/config
-git fetch --all --tags --prune
-git show-ref --heads
+export REFS=$(git show-ref)
 
 if [[ ! -z  ${GIT_TAG} ]]
 then
-    git show-ref --tags | egrep -q "refs/tags/${GIT_TAG}"
+    echo ${REFS} | egrep -q "refs/tags/${GIT_TAG}"
     TAG_EXIT=$?
-    git show-ref --heads | egrep -q "remotes/origin/${GIT_TAG}"
+    echo ${REFS} | egrep -q "refs/remotes/origin/${GIT_TAG}"
     BRANCH_EXIT=$?
     if [[ ${TAG_EXIT} -eq 0 ]]
     then
