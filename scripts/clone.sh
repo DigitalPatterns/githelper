@@ -32,9 +32,9 @@ git fetch --all --tags --prune
 if [[ ! -z  ${GIT_TAG} ]]
 then
     git show-ref --tags | egrep -q "refs/tags/${GIT_TAG}"
-    TAG_EXIT = $?
+    TAG_EXIT=$?
     git show-ref --heads | egrep -q "refs/heads/${GIT_TAG}"
-    BRANCH_EXIT = $?
+    BRANCH_EXIT=$?
     if [[ ${TAG_EXIT} -eq 0 ]]
     then
         git checkout tags/${GIT_TAG}
