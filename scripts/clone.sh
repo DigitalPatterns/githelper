@@ -31,13 +31,21 @@ git fetch --all --tags --prune
 
 if [[ ! -z  ${GIT_TAG} ]]
 then
-  if [[ `git show-ref --tags | egrep -q "refs/tags/${GIT_TAG}"` ]]
-  then
-    git checkout tags/${GIT_TAG}
-  elif [[ `git show-ref --heads | egrep -q "refs/heads/${GIT_TAG}"` ]]
-  then
-    git checkout ${GIT_TAG}
-  fi
+    git show-ref --tags | egrep -q "refs/tags/${GIT_TAG}"
+    TAG_EXIT = $?
+    git show-ref --heads | egrep -q "refs/heads/${GIT_TAG}"
+    BRANCH_EXIT = $?
+    if [[ ${TAG_EXIT} -eq 0 ]]
+    then
+        git checkout tags/${GIT_TAG}
+    elif [[ ${BRANCH_EXIT} -eq 0 ]]
+    then
+        git checkout ${GIT_TAG}
+    else
+        echo "TAG or Branch not found: ${GIT_TAG}"
+    fi
+else
+    echo "TAG or Branch not set"
 fi
 
 ls /repo
