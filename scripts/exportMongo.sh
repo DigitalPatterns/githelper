@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+set -x
 
-if [[ ! -z ${MONGO_DBNAME} ]]
+if [[ ! -z "${MONGO_DBNAME}" ]]
 then
     export MONGO_DBNAME="admin"
 fi
