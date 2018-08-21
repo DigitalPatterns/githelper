@@ -71,7 +71,7 @@ fi
 git branch
 
 $k cp /bin/exportMongo.sh ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/exportMongo.sh --container ${MONGO_CONTAINER_NAME}
-$k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} -- /bin/bash -c "chmod +x /tmp/exportMongo.sh; export MONGO_DBNAME=${MONGO_DBNAME} /tmp/exportMongo.sh"
+$k --namespace ${KUBECTL_NAMESPACE} exec -it ${FORMIO_POD} --container ${MONGO_CONTAINER_NAME} -- /bin/bash -c "chmod +x /tmp/exportMongo.sh; export MONGO_DBNAME=${MONGO_DBNAME}; /tmp/exportMongo.sh"
 
 cd /repo
 $k cp ${KUBECTL_NAMESPACE}/${FORMIO_POD}:/tmp/forms.tar.gz forms.tar.gz --container ${MONGO_CONTAINER_NAME}
