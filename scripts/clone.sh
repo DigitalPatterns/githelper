@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ -z "${DEBUG}" ]]
+if [[ ! -z "${DEBUG}" ]]
 then
     set -x
 fi
@@ -31,7 +31,7 @@ ls -la
 cat .git/config
 export REFS=$(git show-ref)
 
-if [[ ! -z  "${GIT_TAG}" ]]
+if [[ ! -z "${GIT_TAG}" ]]
 then
     echo ${REFS} | egrep -q "refs/tags/${GIT_TAG}"
     TAG_EXIT=$?

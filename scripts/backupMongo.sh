@@ -12,6 +12,13 @@ else
   export HOME="/tmp"
 fi
 
+if [[ ! -z "${MONGO_DBNAME}" ]]
+then
+    echo "${MONGO_DBNAME}"
+else
+    export MONGO_DBNAME="admin"
+fi
+
 mkdir -p ${HOME}/.kube
 export KUBECTL_NAMESPACE="${KUBECTL_NAMESPACE:-bfarch-dev}"
 export FORMIO_DEPLOYMENT_NAME="${FORMIO_DEPLOYMENT_NAME:-formio}"
@@ -20,7 +27,6 @@ export REPO_URL="${REPO_URL}"
 export KUBECTL_SERVER="${KUBECTL_SERVER}"
 export k="kubectl --server ${KUBECTL_SERVER} --token ${KUBECTL_TOKEN} --insecure-skip-tls-verify=true"
 export FORMIO_POD=$($k --namespace ${KUBECTL_NAMESPACE} get pods | grep ${FORMIO_DEPLOYMENT_NAME} | cut -f 1 -d " ")
-export MONGODBNAME="${MONGO_DBNAME}"
 
 clone.sh
 

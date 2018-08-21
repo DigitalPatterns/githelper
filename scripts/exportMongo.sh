@@ -3,8 +3,11 @@ set -x
 
 if [[ ! -z "${MONGO_DBNAME}" ]]
 then
+    echo "${MONGO_DBNAME}"
+else
     export MONGO_DBNAME="admin"
 fi
+
 mkdir -p /tmp/forms
 cd /tmp
 for COLLECTION in roles actions forms schema submissions

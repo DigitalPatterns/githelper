@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -x
 if [[ ! -z "${MONGO_DBNAME}" ]]
 then
-    export MONGO_DBNAME="admin"
+    echo "${MONGO_DBNAME}"
 else
-    export MONGO_DBNAME=${MONGO_DBNAME}
+    export MONGO_DBNAME="admin"
 fi
 
 /bin/clone.sh
