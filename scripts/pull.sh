@@ -14,7 +14,7 @@ else
   export HOME="/tmp"
 fi
 
-if [[ i! -f /home/${USER}/.ssh/id_rsa ]]
+if [[ ! -f /home/${USER}/.ssh/id_rsa ]]
   echo ${PRIVATE_KEY} | base64 -d > /home/${USER}/.ssh/id_rsa
   chmod 400 /home/${USER}/.ssh/id_rsa
   touch /home/${USER}/.ssh/known_hosts
