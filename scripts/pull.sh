@@ -14,11 +14,12 @@ else
   export HOME="/tmp"
 fi
 
-if [[ ! -f /home/${USER}/.ssh/id_rsa ]]
+if [[ ! -f "/home/${USER}/.ssh/id_rsa" ]]
+then
   echo ${PRIVATE_KEY} | base64 -d > /home/${USER}/.ssh/id_rsa
   chmod 400 /home/${USER}/.ssh/id_rsa
   touch /home/${USER}/.ssh/known_hosts
-  /bin/gethost.py ${REPO_URL}
+  /bin/gethost.py "${REPO_URL}"
 fi 
 
 cd /repo
