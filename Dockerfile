@@ -9,9 +9,10 @@ ADD scripts/* /bin/
 
 RUN addgroup -S user1 \
     && adduser -D -G user1 -u 1000 -s /bin/bash -h /home/user1 user1 \
-    && mkdir -p /repo /home/user1/.ssh \
-    && chown -R user1:user1 /home/user1 /repo \
+    && mkdir -p /repo /home/user1/.ssh /data \
+    && chown -R user1:user1 /home/user1 /repo /data \
     && chmod 700 /home/user1/.ssh 
+
 
 RUN apk --no-cache -U upgrade \
     && apk add --no-cache -U bash mongodb mongodb-tools git python py-pip openssh-client postgresql-client ca-certificates gettext curl \
